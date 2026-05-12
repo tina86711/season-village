@@ -477,11 +477,11 @@ nav.scrolled .mobile-menu-btn span {
 /* Numbers in concept stats — match concept-header h2 style */
 .concept-stats .highlight-num {
   font-family: 'Noto Serif TC', serif;
-  font-size: clamp(3rem, 5vw, 4.5rem);
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
   color: var(--color-primary);
   line-height: 1;
   font-weight: 500;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.1em;
   font-variant-numeric: tabular-nums;
   display: inline-block;
 }
@@ -562,16 +562,16 @@ nav.scrolled .mobile-menu-btn span {
 /* --- Section 03: Location --- */
 .location {
   padding: var(--section-padding-desktop);
-  background-color: var(--color-primary);
-  color: var(--color-white);
+  background-color: var(--color-bg);
+  color: var(--color-text);
 }
 
 .location-header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  margin-bottom: 4rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  align-items: flex-end;
+  margin-bottom: 5rem;
   opacity: 0;
   transform: translateY(30px);
   transition: 1s cubic-bezier(0.2, 0.8, 0.2, 1);
@@ -586,19 +586,19 @@ nav.scrolled .mobile-menu-btn span {
 .location-headline .section-title {
   font-size: clamp(2rem, 3.5vw, 2.8rem);
   line-height: 1.4;
-  color: var(--color-white);
-  margin-bottom: 1.5rem;
+  color: var(--color-primary);
+  margin-bottom: 0;
 }
 
 .location-body {
-  max-width: 700px;
-  margin: 0 auto;
+  text-align: left;
+  padding-bottom: 0.5rem;
 }
 
 .location-description {
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--color-text-light);
   font-size: 1rem;
-  line-height: 1.8;
+  line-height: 1.9;
 }
 
 /* Grid Layout: 1 Large Left, 2 Small Right */
@@ -615,8 +615,8 @@ nav.scrolled .mobile-menu-btn span {
 }
 
 .loc-card {
-  background-color: rgba(247, 245, 240, 0.03);
-  border: 1px solid rgba(247, 245, 240, 0.08);
+  background-color: var(--color-white);
+  border: 1px solid rgba(44, 62, 45, 0.08);
   overflow: hidden;
   opacity: 0;
   transform: translateY(30px);
@@ -680,7 +680,7 @@ nav.scrolled .mobile-menu-btn span {
 }
 
 .loc-text p {
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--color-text-light);
   font-size: 0.95rem;
   line-height: 1.8;
   margin: 0;
@@ -708,10 +708,32 @@ nav.scrolled .mobile-menu-btn span {
   color: var(--color-white);
 }
 
+.amenities .container {
+  max-width: 1360px;
+}
+
 /* Header sits above the panels */
 .amenities-header {
-  text-align: center;
-  padding: 100px 40px 60px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  align-items: flex-end;
+  padding: 100px 0 60px;
+}
+
+.amenities-headline {
+  text-align: left;
+}
+
+.amenities-body {
+  text-align: left;
+  padding-bottom: 0.5rem;
+}
+
+.amenities-intro {
+  color: rgba(247, 245, 240, 0.7) !important;
+  line-height: 1.9;
+  margin-bottom: 0;
 }
 
 .amenities-header .section-label {
@@ -720,6 +742,7 @@ nav.scrolled .mobile-menu-btn span {
 
 .amenities-header .section-title {
   color: #F7F5F0;
+  margin-bottom: 0;
 }
 
 /* Three-panel row */
@@ -737,7 +760,8 @@ nav.scrolled .mobile-menu-btn span {
   background-position: center;
   overflow: hidden;
   cursor: pointer;
-  transition: flex 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition: flex 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  backface-visibility: hidden;
 }
 
 /* Dark overlay */
@@ -746,20 +770,23 @@ nav.scrolled .mobile-menu-btn span {
   position: absolute;
   inset: 0;
   background: rgba(10, 20, 10, 0.65);
-  transition: background 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition: background 1.2s cubic-bezier(0.16, 1, 0.3, 1);
   z-index: 1;
+  pointer-events: none;
 }
 
-/* Expand hovered panel */
-.amenity-panel:hover {
+/* Expand hovered or active panel */
+.amenity-panel:hover,
+.amenity-panel.active {
   flex: 2.8;
 }
 
-.amenity-panel:hover::before {
-  background: rgba(10, 20, 10, 0.45);
+.amenity-panel:hover::before,
+.amenity-panel.active::before {
+  background: rgba(10, 20, 10, 0); /* Make transparent on hover */
 }
 
-/* Compress siblings */
+/* Compress siblings and collapse default active panel if any panel is hovered */
 .amenity-panels:has(.amenity-panel:hover) .amenity-panel:not(:hover) {
   flex: 0.7;
 }
@@ -772,18 +799,24 @@ nav.scrolled .mobile-menu-btn span {
   right: 0;
   z-index: 2;
   text-align: center;
-  transition: opacity 0.4s ease;
+  transition: 
+    opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), 
+    transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+  backface-visibility: hidden;
 }
 
 .panel-num {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 3.5rem;
-  font-style: italic;
-  color: rgba(247, 245, 240, 0.25);
+  font-size: 0.9rem;
+  font-style: normal;
+  letter-spacing: 0.4em;
+  color: #8B7355;
   line-height: 1;
   display: block;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
   font-variant-numeric: tabular-nums;
+  text-transform: uppercase;
 }
 
 .panel-title {
@@ -792,11 +825,21 @@ nav.scrolled .mobile-menu-btn span {
   font-weight: 500;
   letter-spacing: 0.15em;
   color: #F7F5F0;
+  line-height: 1.4;
 }
 
-.amenity-panel:hover .panel-idle {
+.amenity-panel:hover .panel-idle,
+.amenity-panel.active .panel-idle {
   opacity: 0;
+  transform: translateY(-60px);
   pointer-events: none;
+}
+
+/* If another panel is hovered, restore idle state for the active one */
+.amenity-panels:has(.amenity-panel:hover) .amenity-panel.active:not(:hover) .panel-idle {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
 }
 
 /* Expanded content */
@@ -809,12 +852,13 @@ nav.scrolled .mobile-menu-btn span {
   padding: 48px 40px;
   text-align: center;
   opacity: 0;
-  transform: translateY(20px);
+  transform: translateY(60px);
   transition:
-    opacity 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) 0.15s,
-    transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) 0.15s;
+    opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
   pointer-events: none;
   will-change: opacity, transform;
+  backface-visibility: hidden;
 }
 
 .panel-expanded::before {
@@ -825,10 +869,18 @@ nav.scrolled .mobile-menu-btn span {
   z-index: -1;
 }
 
-.amenity-panel:hover .panel-expanded {
+.amenity-panel:hover .panel-expanded,
+.amenity-panel.active .panel-expanded {
   opacity: 1;
   transform: translateY(0);
   pointer-events: auto;
+}
+
+/* If another panel is hovered, hide expanded state for the active one */
+.amenity-panels:has(.amenity-panel:hover) .amenity-panel.active:not(:hover) .panel-expanded {
+  opacity: 0;
+  transform: translateY(20px);
+  pointer-events: none;
 }
 
 .panel-label {
@@ -842,12 +894,12 @@ nav.scrolled .mobile-menu-btn span {
 
 .panel-title-lg {
   font-family: 'Noto Serif TC', serif;
-  font-size: 2rem;
+  font-size: 2.2rem;
   font-weight: 500;
   letter-spacing: 0.1em;
   color: #F7F5F0;
-  margin-bottom: 16px;
-  line-height: 1.4;
+  margin-bottom: 24px;
+  line-height: 1.2;
 }
 
 .panel-expanded p {
@@ -862,26 +914,24 @@ nav.scrolled .mobile-menu-btn span {
   list-style: none;
   padding: 0;
   display: flex;
-  flex-direction: column;
-  gap: 8px;
-  align-items: center; /* center list items */
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0;
+  margin-top: 1.5rem;
 }
 
 .panel-items li {
   font-family: 'Noto Sans TC', sans-serif;
-  font-size: 0.9rem;
-  color: rgba(247, 245, 240, 0.85);
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  font-size: 0.95rem;
+  color: rgba(247, 245, 240, 0.9);
+  padding: 0 1.2rem;
+  border-right: 1px solid rgba(247, 245, 240, 0.2);
+  line-height: 1;
 }
 
-.panel-items li::before {
-  content: '';
-  width: 18px;
-  height: 1px;
-  background: #8B7355;
-  flex-shrink: 0;
+.panel-items li:last-child {
+  border-right: none;
 }
 
 /* Divider between panels */
@@ -1000,6 +1050,11 @@ nav.scrolled .mobile-menu-btn span {
   .tab-content {
     grid-template-columns: 1fr;
     gap: 3rem;
+  }
+  .amenities-header {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 80px 20px 40px;
   }
 }
 
@@ -1234,9 +1289,7 @@ nav.scrolled .mobile-menu-btn span {
    ============================================ */
 .architectural-work {
     position: relative;
-    height: 100vh;
-    min-height: 800px;
-    overflow: hidden;
+    padding: var(--section-padding-desktop);
     background: var(--color-bg); /* White background */
     display: flex;
     align-items: center;
@@ -1267,13 +1320,8 @@ nav.scrolled .mobile-menu-btn span {
     text-align: center;
 }
 
-.aw-header h2 {
-    font-family: 'Noto Serif TC', serif;
-    font-size: clamp(1.8rem, 3vw, 2.4rem);
-    color: var(--color-primary); /* Forest Charcoal */
-    font-weight: 500;
-    letter-spacing: 0.15em;
-    margin-bottom: 12px;
+.aw-header .section-title {
+    margin-bottom: 2rem;
 }
 
 .aw-header span {
@@ -1292,19 +1340,23 @@ nav.scrolled .mobile-menu-btn span {
     overflow: hidden;
 }
 
+
+
 .aw-slide {
     display: flex !important;
+    flex-direction: column;
     align-items: center;
-    gap: 70px;
+    text-align: center;
+    gap: 40px;
     will-change: transform;
     backface-visibility: hidden;
 }
 
 .aw-slide-img {
-    flex: 0 0 580px;
-    height: 390px;
+    width: 100%;
+    max-width: 860px;
+    height: 480px;
     overflow: hidden;
-    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.45); /* Shadow Ink */
 }
 
 .aw-slide-img img {
@@ -1321,7 +1373,8 @@ nav.scrolled .mobile-menu-btn span {
 }
 
 .aw-slide-desc {
-    flex: 1;
+    width: 100%;
+    max-width: 700px;
     color: var(--color-primary); /* Forest Charcoal */
 }
 
