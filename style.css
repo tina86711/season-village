@@ -54,7 +54,8 @@ section {
 /* --- Base Typography Refinement (DESIGN-01) --- */
 h1, h2, h3, h4 {
   font-family: var(--font-heading);
-  font-weight: 700;
+  font-weight: 500;
+  letter-spacing: 0.15em;
   line-height: 1.3;
 }
 
@@ -66,8 +67,8 @@ p {
 
 .section-title {
   font-size: clamp(2rem, 4vw, 3rem);
-  letter-spacing: -0.02em;
-  font-weight: 700;
+  letter-spacing: 0.1em;
+  font-weight: 500;
   color: var(--color-primary);
   margin-bottom: 1.5rem;
 }
@@ -113,7 +114,7 @@ nav {
   width: 100%;
   z-index: 1000;
   padding: 1.5rem 0;
-  transition: all 0.4s ease;
+  transition: background-color 0.4s ease, padding 0.4s ease, box-shadow 0.4s ease;
 }
 
 nav.scrolled {
@@ -409,6 +410,8 @@ nav.scrolled .mobile-menu-btn span {
   transform: translateX(-50px);
   opacity: 0;
   transition: 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: transform, opacity;
+  backface-visibility: hidden;
 }
 
 .concept-img.in-view img {
@@ -420,6 +423,8 @@ nav.scrolled .mobile-menu-btn span {
   transform: translateX(50px);
   opacity: 0;
   transition: 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: transform, opacity;
+  backface-visibility: hidden;
 }
 
 .concept-text.in-view {
@@ -427,28 +432,32 @@ nav.scrolled .mobile-menu-btn span {
   opacity: 1;
 }
 
-.highlights {
+.asymmetric-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 3rem;
+  align-items: flex-start;
+}
+
+.highlight-group {
   display: flex;
-  gap: 0;
-  margin-top: 3.5rem;
-  border-top: 1px solid rgba(44, 62, 45, 0.15);
-  padding-top: 2.5rem;
+  flex-direction: column;
+  gap: 2.5rem;
 }
 
 .highlight-item {
-  flex: 1;
-  padding-right: 2rem;
-  border-right: 1px solid rgba(44, 62, 45, 0.12);
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(44, 62, 45, 0.12);
 }
 
-.highlight-item:last-child {
-  border-right: none;
-  padding-right: 0;
-  padding-left: 2rem;
+.highlight-item.large {
+  padding: 2.5rem;
+  background-color: rgba(44, 62, 45, 0.03);
+  border: none;
 }
 
-.highlight-item:nth-child(2) {
-  padding-left: 2rem;
+.highlight-item.small {
+  padding-left: 0;
 }
 
 .highlight-number-row {
@@ -464,6 +473,9 @@ nav.scrolled .mobile-menu-btn span {
   color: var(--color-primary);
   line-height: 1;
   font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  display: inline-block;
+  min-width: 1.5ch;
 }
 
 .highlight-unit {
@@ -473,11 +485,11 @@ nav.scrolled .mobile-menu-btn span {
   font-weight: 500;
 }
 
-.highlight-label {
-  font-size: 0.75rem;
+.highlight-desc {
+  margin-top: 1rem;
+  font-size: 0.9rem;
   color: var(--color-text-light);
-  letter-spacing: 0.05em;
-  line-height: 1.6;
+  max-width: 300px;
 }
 
 @media (max-width: 992px) {
@@ -548,6 +560,8 @@ nav.scrolled .mobile-menu-btn span {
   opacity: 0;
   transform: translateY(20px);
   transition: 0.6s ease;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
   font-size: 0.95rem;
   color: rgba(255,255,255,0.9);
 }
@@ -606,62 +620,100 @@ nav.scrolled .mobile-menu-btn span {
   color: var(--color-white);
 }
 
-.amenities-grid {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 1px;
-  margin-top: 5rem;
-  border: 1px solid rgba(255,255,255,0.1);
-}
-
-.amenity-item {
+.amenity-chapters {
   display: flex;
   flex-direction: column;
+  gap: 10rem;
+  margin-top: 8rem;
+}
+
+.amenity-chapter {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 6rem;
   align-items: center;
-  justify-content: center;
-  padding: 3rem 1.5rem;
-  background-color: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.08);
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  cursor: default;
+  text-align: left;
 }
 
-.amenity-item:hover {
-  background-color: rgba(139, 115, 85, 0.25);
+.amenity-chapter.alternate {
+  grid-template-columns: 1.2fr 0.8fr;
 }
 
-.amenity-item.in-view {
-  opacity: 1;
-  transform: translateY(0);
+.amenity-chapter.alternate .chapter-content {
+  order: 2;
 }
 
-.amenity-icon {
-  width: 48px;
-  height: 48px;
-  margin: 0 auto 1.25rem;
+.chapter-label {
+  font-family: var(--font-accent);
+  font-size: 0.9rem;
+  letter-spacing: 0.3em;
+  color: var(--color-secondary);
+  display: block;
+  margin-bottom: 1.5rem;
+}
+
+.chapter-title {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  color: var(--color-white);
+}
+
+.chapter-content p {
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 2rem;
+  font-size: 1.05rem;
+}
+
+.chapter-items {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  padding: 0;
+}
+
+.chapter-items li {
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.9);
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 0.5rem;
 }
 
-.amenity-icon svg {
-  width: 32px;
-  height: 32px;
-  stroke: var(--color-secondary);
-  stroke-width: 1.5;
+.chapter-items li::before {
+  content: '';
+  width: 4px;
+  height: 4px;
+  background-color: var(--color-secondary);
+  border-radius: 50%;
 }
 
-.amenity-name {
-  font-size: 0.85rem;
-  letter-spacing: 0.05em;
-  color: rgba(255,255,255,0.85);
-  font-weight: 300;
+.chapter-img {
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.3);
 }
 
-/* Stagger delays */
-.amenity-item:nth-child(n) { transition-delay: calc(var(--index) * 0.05s); }
+.chapter-img img {
+  width: 100%;
+  height: 550px;
+  object-fit: cover;
+  transition: transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.amenity-chapter:hover .chapter-img img {
+  transform: scale(1.05);
+}
+
+@media (max-width: 992px) {
+  .asymmetric-grid { grid-template-columns: 1fr; }
+  .amenity-chapter, .amenity-chapter.alternate {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  .amenity-chapter.alternate .chapter-content { order: 0; }
+  .chapter-img img { height: 400px; }
+}
 
 @media (max-width: 1100px) {
   .amenities-grid { grid-template-columns: repeat(4, 1fr); }
@@ -991,6 +1043,210 @@ nav.scrolled .mobile-menu-btn span {
   .contact-form-container {
     padding: 2.5rem;
   }
+}
+
+/* ============================================
+   Section: Architectural Work
+   Token-aligned per DESIGN.md
+   ============================================ */
+.architectural-work {
+    position: relative;
+    height: 100vh;
+    min-height: 800px;
+    overflow: hidden;
+    background: #1a2b1b; /* Forest Charcoal tinted dark, not pure black */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Blurred background */
+.aw-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+.aw-bg-item {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    filter: blur(40px) brightness(0.3);
+    transform: scale(1.08);
+    transition: opacity 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+    will-change: opacity;
+    backface-visibility: hidden;
+}
+
+.aw-bg-item.active {
+    opacity: 1;
+}
+
+/* Inner content */
+.aw-inner {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+}
+
+/* Header */
+.aw-header {
+    text-align: center;
+}
+
+.aw-header h2 {
+    font-family: 'Noto Serif TC', serif; /* DESIGN.md: Display/Headlines */
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    color: #F7F5F0; /* Canvas Cream */
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    margin-bottom: 12px;
+}
+
+.aw-header span {
+    font-family: 'Cormorant Garamond', serif; /* DESIGN.md: Accent */
+    font-size: 0.85rem;
+    letter-spacing: 0.5em;
+    color: #8B7355; /* Earth Gold */
+    text-transform: uppercase;
+}
+
+/* Swiper */
+.aw-swiper {
+    width: 100%;
+    overflow: hidden;
+}
+
+.aw-slide {
+    display: flex !important;
+    align-items: center;
+    gap: 70px;
+    will-change: transform;
+    backface-visibility: hidden;
+}
+
+.aw-slide-img {
+    flex: 0 0 580px;
+    height: 390px;
+    overflow: hidden;
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.45); /* Shadow Ink */
+}
+
+.aw-slide-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+    will-change: transform;
+}
+
+.aw-slide:hover .aw-slide-img img {
+    transform: scale(1.04);
+}
+
+.aw-slide-desc {
+    flex: 1;
+    color: #F7F5F0; /* Canvas Cream */
+}
+
+/* Year — Cormorant Garamond + Earth Gold per DESIGN.md Accent rule */
+.aw-year {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-style: italic;
+    letter-spacing: 0.3em;
+    color: #8B7355; /* Earth Gold */
+    margin-bottom: 18px;
+    font-variant-numeric: tabular-nums;
+}
+
+/* Project title — Noto Serif TC per DESIGN.md Display rule */
+.aw-slide-desc h3 {
+    font-family: 'Noto Serif TC', serif;
+    font-size: clamp(1.6rem, 2.5vw, 2rem);
+    font-weight: 500;
+    color: #F7F5F0; /* Canvas Cream */
+    margin-bottom: 22px;
+    line-height: 1.5;
+    letter-spacing: 0.05em;
+}
+
+/* Body — Noto Sans TC, relaxed leading per DESIGN.md */
+.aw-slide-desc p {
+    font-family: 'Noto Sans TC', sans-serif;
+    color: rgba(247, 245, 240, 0.65); /* Canvas Cream at 65% */
+    line-height: 1.9; /* DESIGN.md: 1.8–1.9 */
+    font-size: 1rem;
+}
+
+/* Navigation — ghost border style per DESIGN.md Components */
+.aw-nav {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.aw-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 12px 18px;
+    opacity: 0.75;
+    transition: opacity 0.3s ease;
+    line-height: 0;
+}
+
+.aw-btn:hover {
+    opacity: 1;
+}
+
+.aw-btn:disabled {
+    opacity: 0.2;
+    cursor: default;
+}
+
+.aw-page {
+    font-family: 'Cormorant Garamond', serif; /* DESIGN.md: Accent/Numbers */
+    color: #F7F5F0;
+    font-size: 1.2rem;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    font-variant-numeric: tabular-nums;
+}
+
+.aw-sep, .aw-total {
+    opacity: 0.3;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .aw-slide {
+        flex-direction: column;
+        gap: 30px;
+    }
+    .aw-slide-img {
+        flex: none;
+        width: 100%;
+        height: 250px;
+    }
+    .architectural-work {
+        height: auto;
+        padding: 100px 0;
+    }
+    .aw-inner {
+        padding: 0 20px;
+        gap: 30px;
+    }
 }
 
 /* --- Footer --- */

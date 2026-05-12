@@ -14,6 +14,9 @@
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
     
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    
     <!-- CSS -->
     <link rel="stylesheet" href="style.css">
     
@@ -116,27 +119,30 @@
                     <h2 class="section-title">不只是家，是一座<br>與自然共生的城中之林。</h2>
                     <p>在台北城南，元利建設用 12,000 坪重新定義都市居住的可能。元利四季莊園緊鄰 12,600 坪木柵公園，與萃湖螢火蟲生態為鄰，讓每一扇窗，都能望見四季更迭的綠意。</p>
                     <p class="concept-secondary-text" style="margin-top: 1.5rem;">這裡不是公寓，是一個有 30 多種植栽、室內外雙泳池、全日餐廳與螢火蟲復育區的完整生活世界。</p>
-                    <div class="highlights">
-                        <div class="highlight-item">
+                    <div class="highlights asymmetric-grid">
+                        <div class="highlight-item large reveal">
+                            <span class="highlight-label">12,000 坪的清晨森呼吸</span>
                             <div class="highlight-number-row">
                                 <span class="highlight-num" data-target="12000">0</span>
                                 <span class="highlight-unit">坪</span>
                             </div>
-                            <span class="highlight-label">台北城南最大複合造鎮</span>
+                            <p class="highlight-desc">台北城南最大的綠意造鎮，讓生活在森林中醒來。</p>
                         </div>
-                        <div class="highlight-item">
-                            <div class="highlight-number-row">
-                                <span class="highlight-num" data-target="1643">0</span>
-                                <span class="highlight-unit">戶</span>
+                        <div class="highlight-group">
+                            <div class="highlight-item small reveal" style="--index: 1;">
+                                <span class="highlight-label">全街廓複合造鎮</span>
+                                <div class="highlight-number-row">
+                                    <span class="highlight-num" data-target="1643">0</span>
+                                    <span class="highlight-unit">戶</span>
+                                </div>
                             </div>
-                            <span class="highlight-label">全街廓複合造鎮</span>
-                        </div>
-                        <div class="highlight-item">
-                            <div class="highlight-number-row">
-                                <span class="highlight-num" data-target="30">0</span>
-                                <span class="highlight-unit">+</span>
+                            <div class="highlight-item small reveal" style="--index: 2;">
+                                <span class="highlight-label">頂級公設項目</span>
+                                <div class="highlight-number-row">
+                                    <span class="highlight-num" data-target="30">0</span>
+                                    <span class="highlight-unit">+</span>
+                                </div>
                             </div>
-                            <span class="highlight-label">頂級公設項目</span>
                         </div>
                     </div>
                 </div>
@@ -174,58 +180,143 @@
             <span class="section-label">AMENITIES</span>
             <h2 class="section-title">逾 2,500 坪公設，<br>30 項以上的生活提案。</h2>
             <p class="amenities-intro" style="max-width: 700px; margin: 0 auto; color: rgba(255,255,255,0.7);">由建築師李天鐸操刀設計，「工」字型建築讓邊間戶型三面採光，8 棟住宅共用一棟獨立會所，SC 鋼骨結構保障結構安全。</p>
-            <div class="amenities-grid">
-                <div class="amenity-item reveal" style="--index: 1;">
-                    <div class="amenity-icon"><i data-lucide="waves"></i></div>
-                    <span class="amenity-name">室內恆溫泳池</span>
+            <div class="amenity-chapters">
+                <!-- Chapter 1: Water -->
+                <div class="amenity-chapter reveal">
+                    <div class="chapter-content">
+                        <span class="chapter-label">CHAPTER 01</span>
+                        <h3 class="chapter-title">水的儀式感</h3>
+                        <p>從室內恆溫到戶外無邊際，在水的波動中洗滌城市的喧囂。</p>
+                        <ul class="chapter-items">
+                            <li>室內恆溫泳池</li>
+                            <li>戶外無邊際泳池</li>
+                            <li>養生湯池</li>
+                        </ul>
+                    </div>
+                    <div class="chapter-img">
+                        <img src="img/VCG41143070254_50M_FA2.jpg" alt="水之儀式" loading="lazy">
+                    </div>
                 </div>
-                <div class="amenity-item reveal" style="--index: 2;">
-                    <div class="amenity-icon"><i data-lucide="droplets"></i></div>
-                    <span class="amenity-name">戶外無邊際泳池</span>
+
+                <!-- Chapter 2: Gathering -->
+                <div class="amenity-chapter reveal alternate">
+                    <div class="chapter-content">
+                        <span class="chapter-label">CHAPTER 02</span>
+                        <h3 class="chapter-title">聚會的藝術</h3>
+                        <p>全日餐廳、音樂廳與 KTV，這裡是與家人好友共享時光的最佳舞台。</p>
+                        <ul class="chapter-items">
+                            <li>全日餐廳</li>
+                            <li>KTV 娛樂室</li>
+                            <li>高爾夫球室</li>
+                            <li>多功能球場</li>
+                        </ul>
+                    </div>
+                    <div class="chapter-img">
+                        <img src="https://picsum.photos/id/42/800/600" alt="聚會藝術" loading="lazy">
+                    </div>
                 </div>
-                <div class="amenity-item reveal" style="--index: 3;">
-                    <div class="amenity-icon"><i data-lucide="utensils"></i></div>
-                    <span class="amenity-name">全日餐廳</span>
-                </div>
-                <div class="amenity-item reveal" style="--index: 4;">
-                    <div class="amenity-icon"><i data-lucide="flame"></i></div>
-                    <span class="amenity-name">養生湯池</span>
-                </div>
-                <div class="amenity-item reveal" style="--index: 5;">
-                    <div class="amenity-icon"><i data-lucide="dumbbell"></i></div>
-                    <span class="amenity-name">健身房</span>
-                </div>
-                <div class="amenity-item reveal" style="--index: 6;">
-                    <div class="amenity-icon"><i data-lucide="heart-pulse"></i></div>
-                    <span class="amenity-name">瑜珈教室</span>
-                </div>
-                <div class="amenity-item reveal" style="--index: 7;">
-                    <div class="amenity-icon"><i data-lucide="trophy"></i></div>
-                    <span class="amenity-name">多功能球場</span>
-                </div>
-                <div class="amenity-item reveal" style="--index: 8;">
-                    <div class="amenity-icon"><i data-lucide="flag"></i></div>
-                    <span class="amenity-name">高爾夫球室</span>
-                </div>
-                <div class="amenity-item reveal" style="--index: 9;">
-                    <div class="amenity-icon"><i data-lucide="book-open"></i></div>
-                    <span class="amenity-name">圖書閱覽區</span>
-                </div>
-                <div class="amenity-item reveal" style="--index: 10;">
-                    <div class="amenity-icon"><i data-lucide="mic"></i></div>
-                    <span class="amenity-name">KTV 娛樂室</span>
-                </div>
-                <div class="amenity-item reveal" style="--index: 11;">
-                    <div class="amenity-icon"><i data-lucide="puzzle"></i></div>
-                    <span class="amenity-name">兒童遊戲室</span>
-                </div>
-                <div class="amenity-item reveal" style="--index: 12;">
-                    <div class="amenity-icon"><i data-lucide="leaf"></i></div>
-                    <span class="amenity-name">螢火蟲復育區</span>
+
+                <!-- Chapter 3: Sanctuary -->
+                <div class="amenity-chapter reveal">
+                    <div class="chapter-content">
+                        <span class="chapter-label">CHAPTER 03</span>
+                        <h3 class="chapter-title">都市的避風港</h3>
+                        <p>在健身房挑戰自我，在螢火蟲復育區遇見自然的奇蹟。</p>
+                        <ul class="chapter-items">
+                            <li>健身房 / 瑜珈教室</li>
+                            <li>圖書閱覽區</li>
+                            <li>螢火蟲復育區</li>
+                            <li>兒童遊戲室</li>
+                        </ul>
+                    </div>
+                    <div class="chapter-img">
+                        <img src="img/木柵公園.jpg" alt="避風港" loading="lazy">
+                    </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- Section 04.5: Architectural Work -->
+    <section id="architectural-work" class="architectural-work">
+        <!-- Blurred background layer -->
+        <div class="aw-bg">
+            <div class="aw-bg-item active" style="background-image:url('img/豪宅品牌/One Park信義聯勤.jpg')"></div>
+            <div class="aw-bg-item" style="background-image:url('img/豪宅品牌/和平大苑.jpg')"></div>
+            <div class="aw-bg-item" style="background-image:url('img/豪宅品牌/元利森活莊園.jpg')"></div>
+            <div class="aw-bg-item" style="background-image:url('img/豪宅品牌/四季酒店.jpg')"></div>
+        </div>
+
+        <div class="aw-inner">
+            <!-- Header -->
+            <div class="aw-header">
+                <h2>建築精選</h2>
+                <span>ARCHITECTURAL WORK</span>
+            </div>
+
+            <!-- Swiper -->
+            <div class="swiper aw-swiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide aw-slide">
+                        <div class="aw-slide-img">
+                            <img src="img/豪宅品牌/One Park信義聯勤.jpg" alt="One Park信義聯勤">
+                        </div>
+                        <div class="aw-slide-desc">
+                            <p class="aw-year">2018</p>
+                            <h3>台北 One Park 信義聯勤</h3>
+                            <p>大安森林公園首排地標，普立茲克獎大師 Richard Rogers 操刀，重新定義台灣豪宅新高度。</p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide aw-slide">
+                        <div class="aw-slide-img">
+                            <img src="img/豪宅品牌/和平大苑.jpg" alt="和平大苑">
+                        </div>
+                        <div class="aw-slide-desc">
+                            <p class="aw-year">2016</p>
+                            <h3>台北 和平大苑</h3>
+                            <p>國際大師 Lorenzo Tondolo 打造，藝術與建築的完美融合，不僅是居所，更是永恆的藝術品。</p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide aw-slide">
+                        <div class="aw-slide-img">
+                            <img src="img/豪宅品牌/元利森活莊園.jpg" alt="元利森活莊園">
+                        </div>
+                        <div class="aw-slide-desc">
+                            <p class="aw-year">2021</p>
+                            <h3>台北 元利森活莊園</h3>
+                            <p>城南森態造鎮系列作，將森林引入城市，創造與自然和諧共生的理想莊園生活。</p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide aw-slide">
+                        <div class="aw-slide-img">
+                            <img src="img/豪宅品牌/四季酒店.jpg" alt="四季酒店">
+                        </div>
+                        <div class="aw-slide-desc">
+                            <p class="aw-year">2025</p>
+                            <h3>台北 四季酒店</h3>
+                            <p>台灣首座頂奢四季酒店，與大師 Richard Rogers 再次合作，信義計畫區國際級新地標。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="aw-nav">
+                <button class="aw-btn aw-prev">
+                    <svg width="46" height="13" viewBox="0 0 46 13" fill="none"><path d="M45.5 12H3L13 1.5" stroke="white" stroke-width="2"/></svg>
+                </button>
+                <div class="aw-page">
+                    <span class="aw-current">01</span>
+                    <span class="aw-sep">/</span>
+                    <span class="aw-total">04</span>
+                </div>
+                <button class="aw-btn aw-next">
+                    <svg width="46" height="13" viewBox="0 0 46 13" fill="none"><path d="M0.5 12H43L33 1.5" stroke="white" stroke-width="2"/></svg>
+                </button>
+            </div>
+        </div>
+    </section>
+
 
     <!-- Section 05: Floor Plans -->
     <section id="floor-plans" class="floor-plans">
@@ -397,7 +488,27 @@
     </footer>
 
     <!-- Scripts -->
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    
     <script>
+        // Architectural Work Swiper
+        const awBgItems = document.querySelectorAll('.aw-bg-item');
+        const awSwiper = new Swiper('.aw-swiper', {
+            loop: false,
+            speed: 800,
+            navigation: {
+                nextEl: '.aw-next',
+                prevEl: '.aw-prev',
+            },
+            on: {
+                slideChange: function () {
+                    const i = this.realIndex;
+                    awBgItems.forEach((el, idx) => el.classList.toggle('active', idx === i));
+                    document.querySelector('.aw-current').textContent = (i + 1).toString().padStart(2, '0');
+                }
+            }
+        });
         // Initialize Lucide Icons
         lucide.createIcons();
 
