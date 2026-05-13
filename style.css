@@ -758,6 +758,7 @@ nav.scrolled .mobile-menu-btn span {
 
 /* Left text panel: floating rectangle, overlapping image via margin */
 .amenity-text-panel {
+  position: relative; /* Anchor for progress bar */
   width: 640px;
   min-height: 480px;
   flex-shrink: 0;
@@ -821,6 +822,29 @@ nav.scrolled .mobile-menu-btn span {
 }
 
 /* Text content styles */
+.amenity-progress-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  background: var(--color-secondary);
+  width: 0;
+  z-index: 20;
+}
+
+.amenity-progress-bar.running {
+  animation: amenityProgress 5s linear infinite;
+}
+
+.amenity-progress-bar.paused {
+  animation-play-state: paused;
+}
+
+@keyframes amenityProgress {
+  0% { width: 0; }
+  100% { width: 100%; }
+}
+
 .amenity-slide-text .panel-label {
   font-family: var(--font-accent);
   font-size: 0.8rem;
@@ -1106,38 +1130,73 @@ nav.scrolled .mobile-menu-btn span {
 
 /* --- Section 06: Ecology --- */
 .ecology {
-  padding: 180px 0;
-  position: relative;
-  background-size: cover;
-  background-position: center;
-  /* Removed background-attachment: fixed for performance */
-  color: var(--color-white);
+  padding: var(--section-padding-desktop);
+  background-color: var(--color-bg);
   text-align: center;
 }
 
-.ecology::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-color: rgba(0, 0, 0, 0.45);
-}
-
-.ecology .container {
-  position: relative;
-  z-index: 1;
-  max-width: 850px;
+.ecology-header {
+  max-width: 900px;
+  margin: 0 auto 60px;
 }
 
 .ecology .section-title {
-  color: var(--color-white);
+  color: var(--color-primary);
+  margin-bottom: 32px;
+}
+
+.ecology-body {
+  max-width: 750px;
+  margin: 0 auto;
+}
+
+.ecology-body p {
+  color: var(--color-text-light);
+  font-size: 1.05rem;
+  line-height: 1.9;
+  margin-bottom: 24px;
 }
 
 .ecology-quote {
-  margin-top: 2.5rem;
+  font-family: var(--font-heading);
   font-style: italic;
-  font-weight: 300;
-  font-size: 1.1rem;
-  color: rgba(255,255,255,0.8);
+  font-weight: 500;
+  font-size: 1.25rem;
+  color: var(--color-primary);
+  margin-top: 40px;
+  position: relative;
+  display: inline-block;
+}
+
+.ecology-quote::before,
+.ecology-quote::after {
+  content: '"';
+  font-size: 2rem;
+  opacity: 0.3;
+  position: absolute;
+}
+
+.ecology-quote::before {
+  left: -30px;
+  top: -10px;
+}
+
+.ecology-quote::after {
+  right: -30px;
+  bottom: -20px;
+}
+
+.ecology-image {
+  max-width: 1200px;
+  margin: 40px auto 0;
+  overflow: hidden;
+  box-shadow: 0 40px 100px rgba(0,0,0,0.08);
+}
+
+.ecology-image img {
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
 /* --- Section 07: Media --- */
@@ -1653,4 +1712,31 @@ footer {
   }
 
   .hero-slide:nth-child(1) { opacity: 1 !important; }
+}
+
+/* ── Full Width Banner ── */
+.full-width-banner {
+  width: 100%;
+  height: 880px; /* Increased by another 30% from 675px */
+  overflow: hidden;
+  background: var(--color-primary);
+}
+
+.full-width-banner .banner-image {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.full-width-banner.in-view .banner-image {
+  transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+  .full-width-banner {
+    height: 300px;
+  }
 }
