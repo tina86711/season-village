@@ -25,6 +25,7 @@
   --section-padding-mobile: 80px 0;
   --container-max-width: 1200px;
   --container-padding: 40px;
+  --container-padding-mobile: 24px;
 }
 
 * {
@@ -37,18 +38,25 @@ html {
   scroll-behavior: smooth;
 }
 
+html {
+  overflow-x: hidden;
+}
+
 body {
   font-family: var(--font-body);
   background-color: var(--color-bg);
   color: var(--color-text);
   line-height: 1.8;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden; /* Prevent horizontal scroll */
+  overflow-x: hidden;
+  width: 100%;
+  position: relative;
 }
 
 /* Optimization for all sections */
 section {
   position: relative;
+  overflow: hidden;
 }
 
 /* --- Base Typography Refinement (DESIGN-01) --- */
@@ -75,7 +83,7 @@ p {
 
 .section-label {
   display: block;
-  font-size: 0.8rem;
+  font-size: 1rem;
   letter-spacing: 0.4em;
   color: var(--color-secondary);
   margin-bottom: 1.25rem;
@@ -701,6 +709,7 @@ nav.scrolled .mobile-menu-btn span {
   background-size: cover;
   background-position: center 40%;
   color: var(--color-white);
+  overflow: hidden;
 }
 
 .amenities .container {
@@ -847,7 +856,7 @@ nav.scrolled .mobile-menu-btn span {
 
 .amenity-slide-text .panel-label {
   font-family: var(--font-accent);
-  font-size: 0.8rem;
+  font-size: 1rem;
   letter-spacing: 0.4em;
   color: var(--color-secondary);
   display: block;
@@ -888,8 +897,8 @@ nav.scrolled .mobile-menu-btn span {
 
 .panel-feature-item i,
 .panel-feature-item svg {
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
   color: var(--color-secondary);
   stroke-width: 1.5;
 }
@@ -971,6 +980,15 @@ nav.scrolled .mobile-menu-btn span {
 }
 
 @media (max-width: 1280px) {
+  :root {
+    --section-padding-desktop: 80px 0;
+  }
+  .amenities-header {
+    padding: 80px 80px 40px;
+  }
+  .ecology-header {
+    margin-bottom: 40px;
+  }
   .amenity-showcase {
     flex-direction: column-reverse;
     height: auto;
@@ -1004,6 +1022,14 @@ nav.scrolled .mobile-menu-btn span {
 
 /* Responsive */
 @media (max-width: 768px) {
+  :root {
+    --section-padding-mobile: 60px 0;
+  }
+  .container, .container-wide {
+    padding-left: var(--container-padding-mobile) !important;
+    padding-right: var(--container-padding-mobile) !important;
+  }
+
   .amenity-showcase {
     flex-direction: column-reverse;
     height: auto;
@@ -1013,7 +1039,10 @@ nav.scrolled .mobile-menu-btn span {
   }
   .amenity-text-panel {
     width: 100%;
-    padding: 40px 24px;
+    padding: 40px var(--container-padding-mobile);
+  }
+  .amenities-header {
+    padding: 60px 0 30px !important;
   }
   .amenity-image-panel {
     height: 360px;
@@ -1021,6 +1050,39 @@ nav.scrolled .mobile-menu-btn span {
   .amenity-nav {
     justify-content: flex-end;
     margin-top: 2rem;
+  }
+
+  /* Ecology Mobile Optimization */
+  .ecology {
+    text-align: left;
+    padding: var(--section-padding-mobile);
+  }
+  .ecology-header {
+    margin-bottom: 40px;
+  }
+  .ecology-body p {
+    font-size: 1rem;
+    line-height: 1.8;
+  }
+  .ecology-quote {
+    font-size: 1.15rem;
+    margin-top: 30px;
+    padding: 0 20px;
+  }
+  .ecology-quote::before { left: -10px; font-size: 1.5rem; }
+  .ecology-quote::after { right: -10px; font-size: 1.5rem; }
+
+  /* Location Mobile Optimization */
+  .location-header {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+  .loc-text {
+    padding: 1.5rem;
+  }
+  .loc-title {
+    font-size: 1.3rem;
   }
 }
 
@@ -1780,7 +1842,10 @@ footer {
 /* ── Full Width Banner ── */
 .full-width-banner {
   width: 100%;
-  height: 880px; /* Increased by another 30% from 675px */
+  height: 880px;
+  height: 45.83vw;
+  max-height: 880px;
+  min-height: 675px;
   overflow: hidden;
   background: var(--color-primary);
 }
@@ -1800,6 +1865,6 @@ footer {
 
 @media (max-width: 768px) {
   .full-width-banner {
-    height: 300px;
+    height: 675px;
   }
 }
