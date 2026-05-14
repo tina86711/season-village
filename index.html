@@ -71,13 +71,15 @@
     <!-- Section 01: Hero -->
     <section class="hero">
         <div class="hero-slider">
-            <div class="hero-slide"><img src="img/外觀3D/DD-001.jpg" alt="元利四季莊園外觀 3D" decoding="async"></div>
-            <div class="hero-slide"><img src="img/外觀3D/050-1.jpg" alt="元利四季莊園外觀 3D" decoding="async"></div>
-            <div class="hero-slide"><img src="img/外觀3D/026.jpg" alt="元利四季莊園外觀 3D" decoding="async"></div>
-            <div class="hero-slide"><img src="img/外觀3D/024.jpg" alt="元利四季莊園外觀 3D" decoding="async"></div>
+            <div class="hero-slide"><img src="img/木柵公園 (1).jpg" alt="元利四季莊園 木柵公園生態" decoding="async"></div>
+            <div class="hero-slide"><img src="img/VCG41143070254_50M_FA2.jpg" alt="元利四季莊園 森林意象" decoding="async"></div>
+            <div class="hero-slide"><img src="img/環境/DJI_20240829061830_0118_D-已增強-NR.jpg" alt="元利四季莊園 環境遠眺" decoding="async"></div>
+            <div class="hero-slide"><img src="img/hero/hero-4.png" alt="元利四季莊園 森林小徑" decoding="async"></div>
         </div>
         <div class="hero-content reveal">
-            <h1 class="hero-title">元利四季莊園</h1>
+            <h1 class="hero-title">
+                <img src="img/四季莊園logo.svg" alt="元利四季莊園" class="hero-logo-img">
+            </h1>
             <h2 class="hero-subtitle">台北城南 12,000 坪｜與自然共棲的森藏居境</h2>
             <a href="#contact" class="btn-cta">
                 立即預約看屋
@@ -102,7 +104,7 @@
                 </div>
             </div>
             <div class="ecology-image">
-                <img src="img/木柵公園 (1).jpg" alt="木柵公園生態" loading="lazy" decoding="async">
+                <img src="img/1D.jpg" alt="元利四季莊園 生態景觀" loading="lazy" decoding="async">
             </div>
         </div>
     </section>
@@ -604,6 +606,11 @@
         </div>
     </footer>
 
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to Top">
+        <i data-lucide="arrow-up"></i>
+    </button>
+
     <!-- Scripts -->
     <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
@@ -789,6 +796,23 @@
         });
 
 
+        // 6. Back to Top
+        const backToTop = document.getElementById('backToTop');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > window.innerHeight) {
+                backToTop.classList.add('show');
+            } else {
+                backToTop.classList.remove('show');
+            }
+        });
+
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
     </script>
 </body>
 
